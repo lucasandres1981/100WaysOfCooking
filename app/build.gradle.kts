@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.a100wayscooking"
+    namespace = "com.example.waysofcooking"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.a100wayscooking"
+        applicationId = "com.example.waysofcooking"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

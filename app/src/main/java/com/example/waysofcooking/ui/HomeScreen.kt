@@ -1,44 +1,47 @@
 package com.example.waysofcooking.ui
 
-
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.waysofcooking.R
 
+// ✅ Asegúrate de tener estas dos líneas ANTES de HomeScreen()
+data class Receta(val nombre: String, val imagenResId: Int)
+
+val recetas = listOf(
+    Receta("Arroz con Pollo", R.drawable.arroz_con_pollo),
+    Receta("Ensalada César con Pollo", R.drawable.ensalada_cesar_con_pollo),
+    Receta("Grilled Cheese", R.drawable.grilled_cheese),
+    Receta("Hamburguesa Clásica con Queso", R.drawable.hamburguesa_clasica_con_queso),
+    Receta("Pan de Ajo", R.drawable.pan_de_ajo),
+    Receta("Papas Fritas", R.drawable.papas_fritas),
+    Receta("Spaghetti Carbonara", R.drawable.spaghetti_carbonara),
+    Receta("Tacos al Pastor", R.drawable.tacos_al_pastor)
+)
 
 @Composable
 fun HomeScreen() {
+    var searchText by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-
-        // Título
         Text(
             text = "100 Ways Of Cooking",
             fontSize = 28.sp,
@@ -50,9 +53,6 @@ fun HomeScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Campo de búsqueda
-        var searchText by remember { mutableStateOf("") }
-
         OutlinedTextField(
             value = searchText,
             onValueChange = { searchText = it },
@@ -63,31 +63,51 @@ fun HomeScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Filtros (solo interfaz por ahora)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Checkbox(
-                checked = true,
-                onCheckedChange = {},
-                modifier = Modifier.padding(end = 10.dp)
-            )
-            Text("5m - 10m")
+            Row {
+                Checkbox(checked = true, onCheckedChange = {})
+                Text("5m - 10m")
+            }
 
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Checkbox(
-                checked = false,
-                onCheckedChange = {},
-                modifier = Modifier.padding(end = 8.dp)
-            )
-            Text("Sorted Recipes")
+            Row {
+                Checkbox(checked = false, onCheckedChange = {})
+                Text("Sorted Recipes")
+            }
         }
 
-        // Grid de recetas
-        
+        Spacer(modifier = Modifier.height(16.dp))
 
+        // ✅ Aquí usamos la lista 'recetas' correctamente
+        LazyColumn {
+            items(recetas.filter {
+                it.nombre.contains(searchText, ignoreCase = true)
+            }) { receta ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
+                        .clickable { /* Acción futura */ }
+                ) {
+                    Image(
+                        painter = painterResource(id = receta.imagenResId),
+                        contentDescription = receta.nombre,
+                        modifier = Modifier
+                            .size(80.dp)
+                            .padding(end = 16.dp)
+                    )
+
+                    Text(
+                        text = receta.nombre,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Medium,
+                        modifier = Modifier.alignByBaseline()
+                    )
+                }
+            }
+        }
     }
 }
 
