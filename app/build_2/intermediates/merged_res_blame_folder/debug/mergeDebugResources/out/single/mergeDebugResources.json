@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_hamburguesa_clasica_con_queso.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/hamburguesa_clasica_con_queso.png"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_spaghetti_carbonara.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/spaghetti_carbonara.png"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_arroz_con_pollo.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/arroz_con_pollo.png"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_pan_de_ajo.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/pan_de_ajo.png"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_tacos_al_pastor.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/tacos_al_pastor.png"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_ensalada_cesar_con_pollo.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/ensalada_cesar_con_pollo.png"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/xml_backup_rules.xml.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_papas_fritas.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/papas_fritas.png"
+    },
+    {
+        "merged": "com.example.a100wayscooking.app-debug-48:/drawable_grilled_cheese.png.flat",
+        "source": "com.example.a100wayscooking.app-main-50:/drawable/grilled_cheese.png"
+    }
+]
