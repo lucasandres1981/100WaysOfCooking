@@ -15,6 +15,8 @@ import kotlinx.coroutines.delay
 import androidx.navigation.NavHostController
 import androidx.compose.material3.DrawerState
 import androidx.compose.material.icons.filled.Person
+import com.example.waysofcooking.ui.components.DrawerItem
+
 
 @Composable
 fun DrawerMenuContent(
@@ -46,12 +48,21 @@ fun DrawerMenuContent(
                 )
                 Column {
                     Text("Lucas Murillo", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                    Text(
-                        "👾 Profile",
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    //Text(
+                    //    "👾 Profile",
+                    //    fontSize = 14.sp,
+                    //    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    //)
+                    DrawerItem("👾 Profile") {
+                        scope.launch {
+                            drawerState.close()
+                            delay(250)
+                            navController.navigate("profile")
+                        }
+                    }
+
                 }
+
             }
 
             Divider(modifier = Modifier.padding(vertical = 8.dp))
@@ -70,7 +81,7 @@ fun DrawerMenuContent(
                 scope.launch {
                     drawerState.close()
                     delay(250)
-                    navController.navigate("recipeSearch")
+                    navController.navigate("search")
                 }
             }
 
@@ -78,7 +89,7 @@ fun DrawerMenuContent(
                 scope.launch {
                     drawerState.close()
                     delay(250)
-                    // navController.navigate("videos")
+                    navController.navigate("videos")
                 }
             }
 
@@ -86,7 +97,7 @@ fun DrawerMenuContent(
                 scope.launch {
                     drawerState.close()
                     delay(250)
-                    // navController.navigate("favorites")
+                    navController.navigate("favorites")
                 }
             }
 
@@ -94,7 +105,7 @@ fun DrawerMenuContent(
                 scope.launch {
                     drawerState.close()
                     delay(250)
-                    // navController.navigate("stores")
+                    navController.navigate("store")
                 }
             }
 
@@ -106,7 +117,7 @@ fun DrawerMenuContent(
                 scope.launch {
                     drawerState.close()
                     delay(250)
-                    // navController.navigate("settings")
+                    navController.navigate("settings")
                 }
             }
 

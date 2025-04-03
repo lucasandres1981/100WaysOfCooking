@@ -49,7 +49,7 @@ fun MainScaffold(
                     },
                     actions = {
                         TextButton(onClick = {
-                            // Acción al login
+                            navController.navigate("login")// Acción al login
                         }) {
                             Text("Login")
                         }
