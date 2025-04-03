@@ -38,7 +38,7 @@ fun LoginScreen(navController: NavHostController) {
                 modifier = Modifier
                     .padding(innerPadding)
                     .fillMaxSize()
-                    .padding(16.dp) // ajustar este padding segun lo requerido no mas de 26 para que no quede muy grande
+                    .padding(16.dp) // ajustar este padding segun lo requerido no mas de 25 para que no quede muy grande
             ) {
                 Text(
                     text = "Pagina de logging",

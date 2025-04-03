@@ -22,7 +22,7 @@ fun MainScaffold(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    // Generar el contenido del menú lateral una vez con los parámetros necesarios
+    // Generar el contenido del menú lateral una vez con los parámetros necesarios si hay que me ter mas se mira mas tarde por el momento dejar asi
     val drawerContentFinal = @Composable {
         Surface(
             modifier = Modifier.width(280.dp),
