@@ -24,7 +24,7 @@ import com.example.waysofcooking.ui.components.MainScaffold
 import androidx.compose.ui.layout.ContentScale
 import com.example.waysofcooking.ui.components.DrawerItem
 import androidx.compose.material.icons.filled.Person
-
+import com.example.waysofcooking.ui.components.DrawerMenuContent
 
 
 
@@ -33,57 +33,7 @@ fun HomeScreen(navController: NavHostController) {
     MainScaffold(
         navController = navController,
         drawerContent = { scope, drawerState ->
-            Surface(color = Color.White) { //Fondo Blanco
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(16.dp)
-                ) {
-                    // Perfil del usuario
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Avatar",
-                            modifier = Modifier
-                                .size(64.dp)
-                                .padding(end = 12.dp)
-                        )
-                        Column {
-                            Text("Lucas Murillo", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                            Text(
-                                "👾 Profile",
-                                fontSize = 14.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
-
-                    Text(
-                        "Products",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-
-                    DrawerItem("🍽 Recipies") { navController.navigate("recipeSearch") }
-                    DrawerItem("🎥 Videos") { /* navController.navigate("videos") */ }
-                    DrawerItem("❤️ Favorites") { /* navController.navigate("favorites") */ }
-                    DrawerItem("🛍 Stores") { /* navController.navigate("stores") */ }
-
-                    Spacer(modifier = Modifier.weight(1f))
-
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
-
-                    DrawerItem("⚙ Settings") { /* navController.navigate("settings") */ }
-                    DrawerItem("📕 Log Out") { /* Acción de cierre de sesión */ }
-                }
-            }
+            DrawerMenuContent(scope = scope, drawerState = drawerState, navController = navController)
         },
         content = { innerPadding ->
             Column(modifier = Modifier.padding(innerPadding)) {
@@ -94,6 +44,8 @@ fun HomeScreen(navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(top = 32.dp)
                         .height(200.dp),
+
+
                     contentScale = ContentScale.Fit
                 )
 
@@ -106,8 +58,8 @@ fun HomeScreen(navController: NavHostController) {
                     Text("Explorar Recetas")
                 }
 
-                // Aquí colocas el contenido real de HomeScreen
-                //Text(text = "Pantalla de inicio con menú hamburguesa")
+                // Aquí colocar el contenido fotos recetas y un boton para ir a las recetas
+                //Text(text = "100 Formas de preparar Papas")
             }
         }
     )

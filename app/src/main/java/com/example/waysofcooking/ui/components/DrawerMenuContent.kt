@@ -24,7 +24,7 @@ fun DrawerMenuContent(
 ) {
     Surface(
         modifier = Modifier.fillMaxHeight(),
-        color = Color.White // ✅ Fondo blanco
+        color = Color.White //  Fondo Menu
     ) {
         Column(
             modifier = Modifier
