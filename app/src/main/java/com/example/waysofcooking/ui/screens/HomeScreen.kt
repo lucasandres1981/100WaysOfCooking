@@ -57,10 +57,11 @@ fun HomeScreen(navController: NavHostController) {
                 )
 
                 Button(
-                    onClick = { navController.navigate("recipeSearch") },
+                    onClick = { navController.navigate("Search") },
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .align(Alignment.CenterHorizontally)
+
                 ) {
                     Text("Explorar Recetas")
                 }

@@ -38,7 +38,7 @@ fun AppNavigation(navController: NavHostController) {
             ProfileScreen(navController = navController)
         }
         composable("menu") {
-            // Si existe una MenuScreen, agrégala aquí
+            // Si existe una MenuScreen, a
             // MenuScreen(navController = navController)
         }
         composable("search") {
