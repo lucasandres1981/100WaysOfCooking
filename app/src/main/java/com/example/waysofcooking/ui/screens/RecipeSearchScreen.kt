@@ -20,16 +20,21 @@ import com.example.waysofcooking.ui.components.DrawerMenuContent
 
 data class Receta(val nombre: String, val imagenResId: Int)
 
-val recetas = listOf(
-    Receta("Arroz con Pollo", R.drawable.arroz_con_pollo),
-    Receta("Ensalada César con Pollo", R.drawable.ensalada_cesar_con_pollo),
-    Receta("Grilled Cheese", R.drawable.grilled_cheese),
-    Receta("Hamburguesa Clásica con Queso", R.drawable.hamburguesa_clasica_con_queso),
-    Receta("Pan de Ajo", R.drawable.pan_de_ajo),
-    Receta("Papas Fritas", R.drawable.papas_fritas),
-    Receta("Spaghetti Carbonara", R.drawable.spaghetti_carbonara),
-    Receta("Tacos al Pastor", R.drawable.tacos_al_pastor)
-)
+
+// Creacion de objeto singleton para reutilizar instancia de lista en otras clases sin necesidad de redefinarla
+
+ object  RecetasDataSource {
+     val recetas  = listOf(
+         Receta("Arroz con Pollo", R.drawable.arroz_con_pollo),
+         Receta("Ensalada César con Pollo", R.drawable.ensalada_cesar_con_pollo),
+         Receta("Grilled Cheese", R.drawable.grilled_cheese),
+         Receta("Hamburguesa Clásica con Queso", R.drawable.hamburguesa_clasica_con_queso),
+         Receta("Pan de Ajo", R.drawable.pan_de_ajo),
+         Receta("Papas Fritas", R.drawable.papas_fritas),
+         Receta("Spaghetti Carbonara", R.drawable.spaghetti_carbonara),
+         Receta("Tacos al Pastor", R.drawable.tacos_al_pastor)
+     )
+ }
 
 @Composable
 fun RecipeSearchScreen(navController: NavHostController) {
@@ -58,7 +63,8 @@ fun RecipeSearchScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 LazyColumn {
-                    items(recetas.filter { it.nombre.contains(searchText, ignoreCase = true) }) { receta ->
+                   items(RecetasDataSource.recetas.filter { it.nombre.contains(searchText, ignoreCase = true) }) { receta ->
+
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
