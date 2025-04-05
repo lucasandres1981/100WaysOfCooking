@@ -85,8 +85,8 @@ fun DrawerMenuContent(
             DrawerItem("❤️ Favorites") {
                 scope.launch {
                     drawerState.close()
-                    delay(250)
-                    // navController.navigate("favorites")
+                    delay(200)
+                     navController.navigate("favorities")
                 }
             }
 
