@@ -1,0 +1,25 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable arroz_con_pollo
+drawable ensalada_cesar_con_pollo
+drawable grilled_cheese
+drawable hamburguesa_clasica_con_queso
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable pan_de_ajo
+drawable papas_fritas
+drawable spaghetti_carbonara
+drawable tacos_al_pastor
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme._100wayscooking
+xml backup_rules
+xml data_extraction_rules
