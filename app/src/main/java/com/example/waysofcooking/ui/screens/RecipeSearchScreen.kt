@@ -17,6 +17,7 @@ import androidx.navigation.NavHostController
 import com.example.waysofcooking.ui.components.MainScaffold
 import com.example.waysofcooking.ui.components.DrawerMenuContent
 import com.example.waysofcooking.data.RecetasDataSource
+import androidx.compose.ui.Alignment
 
 @Composable
 fun RecipeSearchScreen(navController: NavHostController) {
@@ -49,27 +50,38 @@ fun RecipeSearchScreen(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                LazyColumn {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
                     items(recetasFiltradas) { receta ->
-                        Row(
+                        Card(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
-                                    // para navegar ala receta en RecipeDetailScreen
-                                    // navController.navigate("recipeDetail/${receta.nombre}")
-                                }
-                                .padding(8.dp)
+                                    navController.navigate("recipe_detail/${receta.nombreId}")
+                                },
+                            shape = MaterialTheme.shapes.medium,
+                            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                         ) {
-                            Image(
-                                painter = painterResource(id = receta.imagenResId),
-                                contentDescription = receta.nombre,
-                                modifier = Modifier.size(80.dp)
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                text = receta.nombre,
-                                fontSize = 18.sp
-                            )
+                            Row(
+                                modifier = Modifier
+                                    .padding(12.dp)
+                                    .fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Image(
+                                    painter = painterResource(id = receta.imagenResId),
+                                    contentDescription = receta.nombre,
+                                    modifier = Modifier
+                                        .size(80.dp)
+                                        .aspectRatio(1f)
+                                )
+                                Spacer(modifier = Modifier.width(16.dp))
+                                Text(
+                                    text = receta.nombre,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
                         }
                     }
                 }
