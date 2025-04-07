@@ -39,6 +39,8 @@ android {
     buildFeatures {
         compose = true
     }
+
+
 }
 
 dependencies {
@@ -51,8 +53,13 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+
     // ✅ Agrega esta línea para Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.5")
+
+    // Implementacion mapa
+    implementation ("org.osmdroid:osmdroid-android:6.1.20")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
