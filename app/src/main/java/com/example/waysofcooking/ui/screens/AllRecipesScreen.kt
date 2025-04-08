@@ -20,7 +20,8 @@ import com.example.waysofcooking.R
 import androidx.navigation.NavHostController
 import com.example.waysofcooking.ui.components.MainScaffold
 import com.example.waysofcooking.ui.components.DrawerMenuContent
-
+import com.example.waysofcooking.data.RecetasDataSource
+import android.util.Log
 
 @Composable
 fun AllRecipesScreen(navController: NavHostController) {
@@ -38,16 +39,44 @@ fun AllRecipesScreen(navController: NavHostController) {
                 modifier = Modifier
                     .padding(innerPadding)
                     .fillMaxSize()
-                    .padding(16.dp) // ajustar este padding segun lo requerido no mas de 26 para que no quede muy grande
+                    .padding(16.dp)
             ) {
                 Text(
-                    text = "Pagina de Todas las recetas",
+                    text = "Página de Todas las recetas",
                     style = MaterialTheme.typography.titleLarge
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Aquí va el contenido específico de esta pantalla
+                val recetas = RecetasDataSource.recetas
+
+                LazyColumn(modifier = Modifier.padding(8.dp)) {
+                    items(recetas) { receta ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    Log.d("NAVIGATION", "Navegando a: recipeDetail/${receta.nombreId}")
+                                    navController.navigate("recipeDetail/${receta.nombreId}")
+                                }
+                                .padding(8.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = receta.imagenResId),
+                                contentDescription = receta.nombre,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = receta.nombre,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
+                }
             }
         }
     )
