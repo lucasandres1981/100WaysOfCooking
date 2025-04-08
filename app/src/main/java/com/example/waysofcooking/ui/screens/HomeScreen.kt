@@ -80,26 +80,25 @@ fun HomeScreen(navController: NavHostController) {
                     textAlign = TextAlign.Center
                 )
 
-                val recipeImages = RecetasDataSource.recetas.shuffled().take(6).map { it.imagenResId }
+                val recetasPopulares = RecetasDataSource.recetas.shuffled().take(36)
 
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
                     modifier = Modifier
                         .fillMaxWidth()
-                        //.height(240.dp)
                         .padding(horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    items(recipeImages) { imageRes ->
+                    items(recetasPopulares) { receta ->
                         Image(
-                            painter = painterResource(id = imageRes),
-                            contentDescription = "Plato popular",
+                            painter = painterResource(id = receta.imagenResId),
+                            contentDescription = receta.nombre,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .aspectRatio(1f) // cuadrado
+                                .aspectRatio(1f)
                                 .clickable {
-                                    // Acción de navegación
+                                    navController.navigate("recipeDetail/${receta.nombreId}")
                                 },
                             contentScale = ContentScale.Crop
                         )

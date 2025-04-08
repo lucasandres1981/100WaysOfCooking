@@ -57,8 +57,14 @@ dependencies {
     // ✅ Agrega esta línea para Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.5")
 
+
     // Implementacion mapa
     implementation ("org.osmdroid:osmdroid-android:6.1.20")
+
+
+    // ✅ Agrega estas líneas para ExoPlayer
+    implementation("androidx.media3:media3-exoplayer:1.2.0")
+    implementation("androidx.media3:media3-ui:1.2.0")
 
 
     testImplementation(libs.junit)
