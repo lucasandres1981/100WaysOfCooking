@@ -15,6 +15,8 @@ import com.example.waysofcooking.ui.screens.StoreScreen
 import VideoScreen
 import com.example.waysofcooking.ui.screens.RecipeDetailScreen
 import com.example.waysofcooking.ui.screens.SettingsScreen
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 
 @Composable
@@ -25,9 +27,7 @@ fun AppNavigation(navController: NavHostController) {
         }
 
     // Bloque de navegacion
-        composable("home") {
-            HomeScreen(navController = navController)
-        }
+
         composable("login") {
             LoginScreen(navController = navController)
         }
@@ -53,14 +53,22 @@ fun AppNavigation(navController: NavHostController) {
         composable("store") {
             StoreScreen(navController = navController)
         }
-        composable("recipeDetail") {
-            RecipeDetailScreen(navController = navController)
+        composable("recipeDetail/{nombreId}") { backStackEntry ->
+            val nombreId = backStackEntry.arguments?.getString("nombreId")
+            RecipeDetailScreen(navController = navController, nombreId = nombreId)
         }
         composable("allRecipes") {
             AllRecipesScreen(navController = navController)
         }
         composable("settings") {
             SettingsScreen(navController = navController)
+        }
+        composable(
+            "recipe_detail/{nombreId}",
+            arguments = listOf(navArgument("nombreId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val nombreId = backStackEntry.arguments?.getString("nombreId")
+            RecipeDetailScreen(navController, nombreId)
         }
 
     }
