@@ -10,19 +10,42 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.waysofcooking.R
-import com.example.waysofcooking.data.Receta
-import com.example.waysofcooking.data.RecetasDataSource
 import com.example.waysofcooking.ui.components.DrawerMenuContent
 import com.example.waysofcooking.ui.components.MainScaffold
 
+data class Recipe(
+    val id: Int,
+    val name: String,
+    val imageResource: Int,
+    val time: String,
+    val difficulty: String,
+    val description: String
+)
+
 @Composable
 fun FavoritesScreen(navController: NavHostController) {
-    val favoriteRecipes = RecetasDataSource.recetas // Asegúrate de que esta función exista y devuelva la lista de recetas favoritas
+    val favoriteRecipes = listOf(
+        Recipe(
+            id = 1,
+            name = "Panqueques con Banana y Miel",
+            imageResource = R.drawable.waffles_de_avena,
+            time = "15 min",
+            difficulty = "Fácil",
+            description = "Deliciosos panqueques con banana y miel..."
+        ),
+        Recipe(
+            id = 2,
+            name = "Arroz con Pollo",
+            imageResource = R.drawable.arroz_con_pollo,
+            time = "20 min",
+            difficulty = "Media",
+            description = "Una receta tradicional perfecta para cualquier ocasión."
+        )
+    )
 
     MainScaffold(
         navController = navController,
@@ -36,6 +59,7 @@ fun FavoritesScreen(navController: NavHostController) {
                     .padding(16.dp)
                     .fillMaxSize()
             ) {
+
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
@@ -47,8 +71,8 @@ fun FavoritesScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 LazyColumn {
-                    items(favoriteRecipes) { receta ->
-                        RecipeCard(receta = receta, navController = navController)
+                    items(favoriteRecipes) { recipe ->
+                        RecipeCard(recipe = recipe, navController = navController)
                         Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
@@ -56,8 +80,9 @@ fun FavoritesScreen(navController: NavHostController) {
         }
     )
 }
+
 @Composable
-fun RecipeCard(receta: Receta, navController: NavHostController) { // Suponiendo que la clase se llama 'Receta'
+fun RecipeCard(recipe: Recipe, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -66,8 +91,8 @@ fun RecipeCard(receta: Receta, navController: NavHostController) { // Suponiendo
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    painter = painterResource(id = receta.imagenResId), // Asegúrate de que 'imagenResId' es el nombre correcto
-                    contentDescription = receta.nombre,
+                    painter = painterResource(id = recipe.imageResource),
+                    contentDescription = recipe.name,
                     modifier = Modifier.size(80.dp)
                 )
 
@@ -75,7 +100,7 @@ fun RecipeCard(receta: Receta, navController: NavHostController) { // Suponiendo
 
                 Column {
                     Text(
-                        text = receta.nombre,
+                        text = recipe.name,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -83,7 +108,7 @@ fun RecipeCard(receta: Receta, navController: NavHostController) { // Suponiendo
                     Spacer(modifier = Modifier.height(4.dp))
 
                     Text(
-                        text = "${receta.tiempo} - ${"Dificultad: "+ receta.dificultad}",
+                        text = "${recipe.time} - ${recipe.difficulty}",
                         fontSize = 14.sp
                     )
                 }
@@ -93,12 +118,10 @@ fun RecipeCard(receta: Receta, navController: NavHostController) { // Suponiendo
 
             Button(
                 onClick = {
-                    val nombreId = receta.nombreId
-                    navController.navigate("recipe_detail/$nombreId")
+                    // Podrías enviar el ID u otra ruta según el diseño de navegación
+                    navController.navigate("Search")
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(Alignment.End)
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text("Ver Receta")
             }
