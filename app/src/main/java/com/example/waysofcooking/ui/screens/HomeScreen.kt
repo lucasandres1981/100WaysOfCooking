@@ -3,42 +3,29 @@ package com.example.waysofcooking.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.waysofcooking.R
-import androidx.navigation.NavHostController
-import com.example.waysofcooking.ui.components.MainScaffold
-import androidx.compose.ui.layout.ContentScale
-import com.example.waysofcooking.ui.components.DrawerItem
-import androidx.compose.material.icons.filled.Person
-import com.example.waysofcooking.ui.components.DrawerMenuContent
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.waysofcooking.R
 import com.example.waysofcooking.data.RecetasDataSource
-
-
-
-
+import com.example.waysofcooking.ui.components.MainScaffold
+import com.example.waysofcooking.ui.components.DrawerMenuContent
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
+    val recetasPopulares = RecetasDataSource.recetas.shuffled().take(6)
+
     MainScaffold(
         navController = navController,
         drawerContent = { scope, drawerState ->
@@ -53,17 +40,14 @@ fun HomeScreen(navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(top = 32.dp)
                         .height(200.dp),
-
-
                     contentScale = ContentScale.Fit
                 )
 
                 Button(
-                    onClick = { navController.navigate("Search") },
+                    onClick = { navController.navigate("search") },
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .align(Alignment.CenterHorizontally)
-
                 ) {
                     Text("Explorar Recetas")
                 }
@@ -80,26 +64,24 @@ fun HomeScreen(navController: NavHostController) {
                     textAlign = TextAlign.Center
                 )
 
-                val recipeImages = RecetasDataSource.recetas.shuffled().take(6).map { it.imagenResId }
-
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
                     modifier = Modifier
                         .fillMaxWidth()
-                        //.height(240.dp)
                         .padding(horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    items(recipeImages) { imageRes ->
+                    items(recetasPopulares) { receta ->
                         Image(
-                            painter = painterResource(id = imageRes),
-                            contentDescription = "Plato popular",
+                            painter = painterResource(id = receta.imagenResId),
+                            contentDescription = receta.nombre,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .aspectRatio(1f) // cuadrado
+                                .aspectRatio(1f)
                                 .clickable {
-                                    // Acción de navegación
+                                    val nombreId = receta.nombreId
+                                    navController.navigate("recipe_detail/$nombreId")
                                 },
                             contentScale = ContentScale.Crop
                         )

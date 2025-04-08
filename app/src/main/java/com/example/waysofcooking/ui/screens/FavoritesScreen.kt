@@ -16,6 +16,10 @@ import androidx.navigation.NavHostController
 import com.example.waysofcooking.R
 import com.example.waysofcooking.ui.components.DrawerMenuContent
 import com.example.waysofcooking.ui.components.MainScaffold
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+
+
 
 data class Recipe(
     val id: Int,
@@ -66,6 +70,7 @@ fun FavoritesScreen(navController: NavHostController) {
                     text = "Favoritos",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold
+
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -86,17 +91,24 @@ fun RecipeCard(recipe: Recipe, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp)
+            .padding(vertical = 8.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
                     painter = painterResource(id = recipe.imageResource),
                     contentDescription = recipe.name,
-                    modifier = Modifier.size(80.dp)
+                    modifier = Modifier
+                        .size(80.dp)
+                        .padding(end = 16.dp)
+                        .clip(RoundedCornerShape(8.dp))
                 )
-
-                Spacer(modifier = Modifier.width(16.dp))
 
                 Column {
                     Text(
@@ -109,16 +121,16 @@ fun RecipeCard(recipe: Recipe, navController: NavHostController) {
 
                     Text(
                         text = "${recipe.time} - ${recipe.difficulty}",
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             Button(
                 onClick = {
-                    // Podrías enviar el ID u otra ruta según el diseño de navegación
                     navController.navigate("Search")
                 },
                 modifier = Modifier.align(Alignment.CenterHorizontally)

@@ -12,10 +12,17 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
+import com.example.waysofcooking.R
+
 import androidx.navigation.NavHostController
 import androidx.compose.material3.DrawerState
 import androidx.compose.material.icons.filled.Person
 import com.example.waysofcooking.ui.components.DrawerItem
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+
 
 
 @Composable
@@ -39,11 +46,12 @@ fun DrawerMenuContent(
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Person,
+                Image(
+                    painter = painterResource(id = R.drawable.lucas),
                     contentDescription = "Avatar",
                     modifier = Modifier
                         .size(64.dp)
+                        .clip(CircleShape)
                         .padding(end = 12.dp)
                 )
                 Column {
@@ -113,13 +121,13 @@ fun DrawerMenuContent(
 
             Divider(modifier = Modifier.padding(vertical = 12.dp))
 
-            DrawerItem("⚙ Settings") {
-                scope.launch {
-                    drawerState.close()
-                    delay(250)
-                    navController.navigate("settings")
-                }
-            }
+            //DrawerItem("⚙ Settings") {
+            //    scope.launch {
+           //         drawerState.close()
+           //         delay(250)
+            //        navController.navigate("settings")
+           //     }
+           // }
 
             DrawerItem("📕 Log Out") {
                 scope.launch {

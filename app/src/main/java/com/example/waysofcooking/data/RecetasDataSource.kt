@@ -4,6 +4,7 @@ import com.example.waysofcooking.R
 
 data class Receta(
     val nombre: String,
+    val nombreId: String,
     val imagenResId: Int,
     val ingredientes: List<String>,
     val pasos: List<String>,
@@ -14,6 +15,7 @@ object RecetasDataSource {
     val recetas = listOf(
         Receta(
             nombre = "Arroz Chaufa",
+            nombreId = "Arroz Chaufa",
             imagenResId = R.drawable.arroz_chaufa,
             ingredientes = listOf("2 tazas de arroz cocido", "150g de pollo", "2 huevos", "Salsa de soya", "Cebolla larga"),
             pasos = listOf(
@@ -24,6 +26,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ajiaco Santafereño",
+            nombreId = "Ajiaco Santafereño",
             imagenResId = R.drawable.ajiaco_santafereno,
             ingredientes = listOf("3 tipos de papa", "Pechuga de pollo", "Guascas", "Mazorca", "Crema de leche", "Alcaparras"),
             pasos = listOf(
@@ -34,6 +37,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Albóndigas en Salsa",
+            nombreId = "Albóndigas en Salsa",
             imagenResId = R.drawable.albondigas_en_salsa,
             ingredientes = listOf("Carne molida", "Pan rallado", "Huevo", "Cebolla", "Salsa de tomate"),
             pasos = listOf(
@@ -43,6 +47,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Arepas con Queso",
+            nombreId = "Arepas con Queso",
             imagenResId = R.drawable.arepas_con_queso,
             ingredientes = listOf("Harina de maíz", "Queso rallado", "Agua", "Sal"),
             pasos = listOf(
@@ -53,6 +58,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ceviche de Camarón",
+            nombreId = "Ceviche de Camarón",
             imagenResId = R.drawable.ceviche_de_camaron,
             ingredientes = listOf("Camarón cocido", "Jugo de limón", "Cebolla morada", "Tomate", "Cilantro"),
             pasos = listOf(
@@ -62,6 +68,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Croquetas de Pollo",
+            nombreId = "Croquetas de Pollo",
             imagenResId = R.drawable.croquetas_de_pollo,
             ingredientes = listOf("Pollo desmenuzado", "Bechamel", "Pan rallado", "Huevo", "Aceite"),
             pasos = listOf(
@@ -72,6 +79,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Curry de Garbanzos",
+            nombreId = "Curry de Garbanzos",
             imagenResId = R.drawable.curry_de_garbanzos,
             ingredientes = listOf("Garbanzos cocidos", "Leche de coco", "Curry", "Cebolla", "Ajo"),
             pasos = listOf(
@@ -82,6 +90,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Empanada de Carne",
+            nombreId = "Empanada de Carne",
             imagenResId = R.drawable.empanada_de_carne,
             ingredientes = listOf("Masa para empanadas", "Carne molida", "Papa cocida", "Cebolla"),
             pasos = listOf(
@@ -92,6 +101,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ensalada Caprese",
+            nombreId = "Ensalada Caprese",
             imagenResId = R.drawable.ensalada_caprese,
             ingredientes = listOf("Tomate", "Mozzarella", "Albahaca", "Aceite de oliva"),
             pasos = listOf(
@@ -102,6 +112,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ensalada de Quínua",
+            nombreId = "Ensalada de Quínua",
             imagenResId = R.drawable.ensalada_de_quinua,
             ingredientes = listOf("Quínua cocida", "Pimientos", "Pepino", "Limón", "Aceite de oliva"),
             pasos = listOf(
@@ -113,6 +124,7 @@ object RecetasDataSource {
 
         Receta(
             nombre = "Ajiaco Santafereño",
+            nombreId = "Ajiaco Santafereño",
             imagenResId = R.drawable.ajiaco_santafereno,
             ingredientes = listOf(
                 "3 tipos de papa (criolla, sabanera, pastusa)",
@@ -132,6 +144,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Albóndigas en Salsa",
+            nombreId = "Albóndigas en Salsa",
             imagenResId = R.drawable.albondigas_en_salsa,
             ingredientes = listOf(
                 "500 g de carne molida",
@@ -151,6 +164,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Arepas con Queso",
+            nombreId = "Arepas con Queso",
             imagenResId = R.drawable.arepas_con_queso,
             ingredientes = listOf(
                 "2 tazas de harina de maíz precocida",
@@ -168,6 +182,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Arroz Chaufa",
+            nombreId = "Arroz Chaufa",
             imagenResId = R.drawable.arroz_chaufa,
             ingredientes = listOf(
                 "2 tazas de arroz cocido",
@@ -188,6 +203,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Bandeja Paisa",
+            nombreId = "Bandeja Paisa",
             imagenResId = R.drawable.bandeja_paisa,
             ingredientes = listOf(
                 "Frijoles",
@@ -209,6 +225,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Canelones de Ricotta",
+            nombreId = "Canelones de Ricotta",
             imagenResId = R.drawable.canelones_de_ricotta,
             ingredientes = listOf(
                 "Placas de canelones",
@@ -228,6 +245,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Cazuela de Mariscos",
+            nombreId = "Cazuela de Mariscos",
             imagenResId = R.drawable.cazuela_de_mariscos,
             ingredientes = listOf(
                 "Camarones",
@@ -250,6 +268,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ceviche Mixto",
+            nombreId = "Ceviche Mixto",
             imagenResId = R.drawable.ceviche_mixto,
             ingredientes = listOf(
                 "Pescado blanco",
@@ -270,6 +289,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Chuleta Valluna",
+            nombreId = "Chuleta Valluna",
             imagenResId = R.drawable.chuleta_vallecaucana,
             ingredientes = listOf(
                 "Filetes de cerdo",
@@ -289,6 +309,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ceviche de Camarón",
+            nombreId = "Ceviche de Camarón",
             imagenResId = R.drawable.ceviche_de_camaron,
             ingredientes = listOf(
                 "500 g de camarones cocidos",
@@ -307,6 +328,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Croquetas de Pollo",
+            nombreId = "Croquetas de Pollo",
             imagenResId = R.drawable.croquetas_de_pollo,
             ingredientes = listOf(
                 "2 tazas de pollo cocido y desmenuzado",
@@ -324,6 +346,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Curry de Garbanzos",
+            nombreId = "Curry de Garbanzos",
             imagenResId = R.drawable.curry_de_garbanzos,
             ingredientes = listOf(
                 "2 tazas de garbanzos cocidos",
@@ -341,6 +364,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Empanada de Carne",
+            nombreId = "Empanada de Carne",
             imagenResId = R.drawable.empanada_de_carne,
             ingredientes = listOf(
                 "Masa para empanadas",
@@ -359,6 +383,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ensalada Caprese",
+            nombreId = "Ensalada Caprese",
             imagenResId = R.drawable.ensalada_caprese,
             ingredientes = listOf(
                 "Tomates frescos",
@@ -376,6 +401,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Ensalada de Quinua",
+            nombreId = "Ensalada de Quinua",
             imagenResId = R.drawable.ensalada_de_quinua,
             ingredientes = listOf(
                 "1 taza de quinua cocida",
@@ -394,6 +420,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Fajitas de Res",
+            nombreId = "Fajitas de Res",
             imagenResId = R.drawable.fajitas_de_res,
             ingredientes = listOf(
                 "500 g de carne de res en tiras",
@@ -411,6 +438,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Pescado al Horno",
+            nombreId = "Pescado al Horno",
             imagenResId = R.drawable.pescado_al_horno,
             ingredientes = listOf(
                 "2 filetes de pescado blanco",
@@ -427,7 +455,8 @@ object RecetasDataSource {
             )
         ),
         Receta(
-            nombre = "Pollo a la Naranja",
+            nombre= "Pollo a la Naranja",
+            nombreId = "Pollo a la Naranja",
             imagenResId = R.drawable.pollo_a_la_naranja,
             ingredientes = listOf(
                 "2 pechugas de pollo",
@@ -445,6 +474,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Sándwich Cubano",
+            nombreId = "Sándwich Cubano",
             imagenResId = R.drawable.sandwich_cubano,
             ingredientes = listOf(
                 "Pan cubano o baguette",
@@ -462,6 +492,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Sopa de Lentejas",
+            nombreId = "Sopa de Lentejas",
             imagenResId = R.drawable.sopa_de_lentejas,
             ingredientes = listOf(
                 "1 taza de lentejas",
@@ -478,7 +509,8 @@ object RecetasDataSource {
             )
         ),
         Receta(
-            nombre = "Sopa de Tomate",
+            nombre= "Sopa de Tomate",
+            nombreId = "Sopa de Tomate",
             imagenResId = R.drawable.sopa_de_tomate,
             ingredientes = listOf(
                 "4 tomates maduros",
@@ -496,6 +528,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Tortilla Española",
+            nombreId = "Tortilla Española",
             imagenResId = R.drawable.tortilla_espanola,
             ingredientes = listOf(
                 "4 huevos",
@@ -513,6 +546,7 @@ object RecetasDataSource {
         ),
         Receta(
             nombre = "Waffles de Avena",
+            nombreId = "Waffles de Avena",
             imagenResId = R.drawable.waffles_de_avena,
             ingredientes = listOf(
                 "1 taza de avena molida",

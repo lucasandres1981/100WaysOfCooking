@@ -5,11 +5,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,56 +20,74 @@ import com.example.waysofcooking.data.RecetasDataSource
 
 @Composable
 fun RecipeSearchScreen(navController: NavHostController) {
+    var searchText by remember { mutableStateOf("") }
+
+    val recetasFiltradas = RecetasDataSource.recetas.filter {
+        it.nombre.contains(searchText, ignoreCase = true)
+    }
+
     MainScaffold(
         navController = navController,
         drawerContent = { scope, drawerState ->
             DrawerMenuContent(navController, scope, drawerState)
         },
-        content = { innerPadding ->
-            var searchText by remember { mutableStateOf("") }
-
-            // Lista filtrada en tiempo real
-            val recetasFiltradas = RecetasDataSource.recetas.filter {
-                it.nombre.contains(searchText, ignoreCase = true)
-            }
-
+        content = { padding ->
             Column(
                 modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(16.dp)
                     .fillMaxSize()
+                    .padding(padding)
+                    .padding(16.dp)
             ) {
+                Text(
+                    text = "Buscar Recetas",
+                    style = MaterialTheme.typography.titleLarge
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
                 OutlinedTextField(
                     value = searchText,
                     onValueChange = { searchText = it },
-                    label = { Text("The 100 Easiest Recipes") },
-                    leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Buscar") },
+                    label = { Text("Buscar por nombre") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                LazyColumn {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
                     items(recetasFiltradas) { receta ->
-                        Row(
+                        Card(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
-                                    // para navegar ala receta en RecipeDetailScreen
-                                    // navController.navigate("recipeDetail/${receta.nombre}")
-                                }
-                                .padding(8.dp)
+                                    val nombreId = receta.nombreId
+                                    navController.navigate("recipe_detail/$nombreId")
+                                },
+                            shape = MaterialTheme.shapes.medium,
+                            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                         ) {
-                            Image(
-                                painter = painterResource(id = receta.imagenResId),
-                                contentDescription = receta.nombre,
-                                modifier = Modifier.size(80.dp)
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                text = receta.nombre,
-                                fontSize = 18.sp
-                            )
+                            Row(
+                                modifier = Modifier
+                                    .padding(12.dp)
+                                    .fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Image(
+                                    painter = painterResource(id = receta.imagenResId),
+                                    contentDescription = receta.nombre,
+                                    modifier = Modifier
+                                        .size(80.dp)
+                                        .aspectRatio(1f),
+                                    contentScale = ContentScale.Crop
+                                )
+                                Spacer(modifier = Modifier.width(16.dp))
+                                Text(
+                                    text = receta.nombre,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
                         }
                     }
                 }

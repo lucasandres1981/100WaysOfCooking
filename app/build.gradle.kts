@@ -50,8 +50,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("org.osmdroid:osmdroid-android:6.1.20")
 
-    // ✅ Agrega esta línea para Navigation Compose
+
+    // Agrega esta línea para Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.5")
 
     testImplementation(libs.junit)
