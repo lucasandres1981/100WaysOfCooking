@@ -12,7 +12,7 @@ import com.example.waysofcooking.ui.screens.LoginScreen
 import com.example.waysofcooking.ui.screens.ProfileScreen
 import com.example.waysofcooking.ui.screens.RegisterScreen
 import com.example.waysofcooking.ui.screens.StoreScreen
-import com.example.waysofcooking.ui.screens.VideoScreen
+import VideoScreen
 import com.example.waysofcooking.ui.screens.RecipeDetailScreen
 import com.example.waysofcooking.ui.screens.SettingsScreen
 
