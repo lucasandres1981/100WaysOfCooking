@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -21,6 +22,7 @@ data class Recipe(
     val id: Int,
     val name: String,
     val imageResource: Int,
+    val nombreId: String,
     val time: String,
     val difficulty: String,
     val description: String
@@ -31,7 +33,8 @@ fun FavoritesScreen(navController: NavHostController) {
     val favoriteRecipes = listOf(
         Recipe(
             id = 1,
-            name = "Panqueques con Banana y Miel",
+            name = "Wafles de Avena",
+            nombreId = "waffles_de_avena",
             imageResource = R.drawable.waffles_de_avena,
             time = "15 min",
             difficulty = "Fácil",
@@ -39,12 +42,32 @@ fun FavoritesScreen(navController: NavHostController) {
         ),
         Recipe(
             id = 2,
-            name = "Arroz con Pollo",
-            imageResource = R.drawable.arroz_con_pollo,
+            name = "Arroz Chaufa",
+            nombreId = "arroz_chaufa",
+            imageResource = R.drawable.arroz_chaufa,
             time = "20 min",
             difficulty = "Media",
             description = "Una receta tradicional perfecta para cualquier ocasión."
+        ),
+        Recipe(
+            id = 3,
+            name = "Curry de Garbanzos",
+            nombreId = "curry_de_garbanzos",
+            imageResource = R.drawable.curry_de_garbanzos,
+            time = "25 min",
+            difficulty = "Alta",
+            description = "Una receta tradicional perfecta para cualquier ocasión."
+        ),
+        Recipe(
+            id = 4,
+            name = "Ajiaco Santafereño",
+            nombreId = "ajiaco_santafereno",
+            imageResource = R.drawable.ajiaco_santafereno,
+            time = "30 min",
+            difficulty = "Media",
+            description = "Una receta tradicional perfecta para cualquier ocasión."
         )
+
     )
 
     MainScaffold(
@@ -118,10 +141,11 @@ fun RecipeCard(recipe: Recipe, navController: NavHostController) {
 
             Button(
                 onClick = {
-                    // Podrías enviar el ID u otra ruta según el diseño de navegación
-                    navController.navigate("Search")
+                    navController.navigate("recipeDetail/${recipe.nombreId}")
                 },
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.End)
             ) {
                 Text("Ver Receta")
             }
