@@ -8,7 +8,9 @@ data class Receta(
     val imagenResId: Int,
     val ingredientes: List<String>,
     val pasos: List<String>,
-    var esFavorita: Boolean = false
+    var esFavorita: Boolean = false,
+    var tiempo: String,
+    var dificultad: String
 )
 
 object RecetasDataSource {
@@ -18,6 +20,8 @@ object RecetasDataSource {
             nombreId = "Arroz Chaufa",
             imagenResId = R.drawable.arroz_chaufa,
             ingredientes = listOf("2 tazas de arroz cocido", "150g de pollo", "2 huevos", "Salsa de soya", "Cebolla larga"),
+            tiempo = "20 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Freír el pollo en trozos.",
                 "Agregar huevo batido y revolver.",
@@ -29,6 +33,8 @@ object RecetasDataSource {
             nombreId = "Ajiaco Santafereño",
             imagenResId = R.drawable.ajiaco_santafereno,
             ingredientes = listOf("3 tipos de papa", "Pechuga de pollo", "Guascas", "Mazorca", "Crema de leche", "Alcaparras"),
+            tiempo = "25 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Cocinar las papas con el pollo y la mazorca.",
                 "Añadir guascas y cocinar hasta espesar.",
@@ -40,6 +46,8 @@ object RecetasDataSource {
             nombreId = "Albóndigas en Salsa",
             imagenResId = R.drawable.albondigas_en_salsa,
             ingredientes = listOf("Carne molida", "Pan rallado", "Huevo", "Cebolla", "Salsa de tomate"),
+            tiempo = "40 Min",
+            dificultad = "Baja",
             pasos = listOf(
                 "Formar albóndigas con carne, pan rallado y huevo.",
                 "Freír y cocinar en salsa de tomate con cebolla."
@@ -50,6 +58,8 @@ object RecetasDataSource {
             nombreId = "Arepas con Queso",
             imagenResId = R.drawable.arepas_con_queso,
             ingredientes = listOf("Harina de maíz", "Queso rallado", "Agua", "Sal"),
+            tiempo = "20 Min",
+            dificultad = "Baja",
             pasos = listOf(
                 "Mezclar harina, sal y agua.",
                 "Formar arepas e incluir queso.",
@@ -61,6 +71,8 @@ object RecetasDataSource {
             nombreId = "Ceviche de Camarón",
             imagenResId = R.drawable.ceviche_de_camaron,
             ingredientes = listOf("Camarón cocido", "Jugo de limón", "Cebolla morada", "Tomate", "Cilantro"),
+            tiempo = "50 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Mezclar camarón con jugo de limón y vegetales.",
                 "Refrigerar y servir frío."
@@ -71,6 +83,8 @@ object RecetasDataSource {
             nombreId = "Croquetas de Pollo",
             imagenResId = R.drawable.croquetas_de_pollo,
             ingredientes = listOf("Pollo desmenuzado", "Bechamel", "Pan rallado", "Huevo", "Aceite"),
+            tiempo = "30 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Mezclar pollo con bechamel.",
                 "Formar croquetas y empanizar.",
@@ -82,6 +96,8 @@ object RecetasDataSource {
             nombreId = "Curry de Garbanzos",
             imagenResId = R.drawable.curry_de_garbanzos,
             ingredientes = listOf("Garbanzos cocidos", "Leche de coco", "Curry", "Cebolla", "Ajo"),
+            tiempo = "50 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Freír cebolla y ajo.",
                 "Agregar curry y garbanzos.",
@@ -93,6 +109,8 @@ object RecetasDataSource {
             nombreId = "Empanada de Carne",
             imagenResId = R.drawable.empanada_de_carne,
             ingredientes = listOf("Masa para empanadas", "Carne molida", "Papa cocida", "Cebolla"),
+            tiempo = "60 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Preparar relleno con carne y papa.",
                 "Rellenar y sellar la masa.",
@@ -104,6 +122,8 @@ object RecetasDataSource {
             nombreId = "Ensalada Caprese",
             imagenResId = R.drawable.ensalada_caprese,
             ingredientes = listOf("Tomate", "Mozzarella", "Albahaca", "Aceite de oliva"),
+            tiempo = "20 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Cortar tomate y mozzarella.",
                 "Intercalar con hojas de albahaca.",
@@ -115,6 +135,8 @@ object RecetasDataSource {
             nombreId = "Ensalada de Quínua",
             imagenResId = R.drawable.ensalada_de_quinua,
             ingredientes = listOf("Quínua cocida", "Pimientos", "Pepino", "Limón", "Aceite de oliva"),
+            tiempo = "30 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Cocinar la quínua.",
                 "Cortar vegetales.",
@@ -135,6 +157,8 @@ object RecetasDataSource {
                 "Alcaparras",
                 "Sal al gusto"
             ),
+            tiempo = "40 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Pelar y cortar las papas.",
                 "Cocinar las papas con mazorca y pollo en agua.",
@@ -155,6 +179,8 @@ object RecetasDataSource {
                 "Tomate",
                 "Sal y pimienta"
             ),
+            tiempo = "40 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Mezclar carne con huevo, pan rallado, sal y pimienta.",
                 "Formar albóndigas y dorarlas.",
@@ -173,6 +199,8 @@ object RecetasDataSource {
                 "Sal al gusto",
                 "Mantequilla"
             ),
+            tiempo = "40 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Mezclar la harina con agua, sal y queso.",
                 "Formar arepas con las manos.",
@@ -193,6 +221,8 @@ object RecetasDataSource {
                 "Aceite",
                 "Sal y pimienta"
             ),
+            tiempo = "40 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Freír el pollo en aceite caliente.",
                 "Agregar cebolla larga picada y sofreír.",
@@ -216,6 +246,8 @@ object RecetasDataSource {
                 "Chorizo",
                 "Aguacate"
             ),
+            tiempo = "40 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Cocinar los frijoles con condimentos.",
                 "Preparar arroz, carne, plátano y chicharrón por separado.",
@@ -235,6 +267,8 @@ object RecetasDataSource {
                 "Queso parmesano",
                 "Sal y pimienta"
             ),
+            tiempo = "40 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Hervir las placas de canelones.",
                 "Mezclar ricotta con espinaca cocida, sal y pimienta.",
@@ -257,7 +291,8 @@ object RecetasDataSource {
                 "Cebolla",
                 "Ají dulce",
                 "Sal y pimienta"
-            ),
+            ),tiempo = "40 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Sofreír el ajo, la cebolla y el ají.",
                 "Agregar los mariscos y cocinar por 5 minutos.",
@@ -279,7 +314,8 @@ object RecetasDataSource {
                 "Cilantro",
                 "Ají",
                 "Sal"
-            ),
+            ),tiempo = "25 Min",
+            dificultad = "Baja",
             pasos = listOf(
                 "Cortar el pescado en cubos y marinar en limón por 15 minutos.",
                 "Agregar camarones y pulpo cocido.",
@@ -299,7 +335,8 @@ object RecetasDataSource {
                 "Ajo en polvo",
                 "Sal y pimienta",
                 "Aceite para freír"
-            ),
+            ),tiempo = "25 Min",
+            dificultad = "Baja",
             pasos = listOf(
                 "Aplastar los filetes y sazonar con sal, pimienta y ajo.",
                 "Pasar por harina, huevo batido y luego pan rallado.",
@@ -318,7 +355,8 @@ object RecetasDataSource {
                 "1 limón",
                 "Cilantro fresco",
                 "Sal y pimienta al gusto"
-        ),
+            ),tiempo = "25 Min",
+            dificultad = "Baja",
             pasos = listOf(
                 "Picar la cebolla y el tomate en cubos pequeños.",
                 "Mezclar con los camarones cocidos.",
@@ -336,7 +374,8 @@ object RecetasDataSource {
                 "1 huevo",
                 "Pan rallado",
                 "Aceite para freír"
-            ),
+            ),tiempo = "25 Min",
+            dificultad = "Baja",
             pasos = listOf(
                 "Mezclar el pollo con la bechamel y formar bolitas.",
                 "Pasar por huevo y luego pan rallado.",
@@ -354,7 +393,8 @@ object RecetasDataSource {
                 "1 tomate",
                 "1 taza de leche de coco",
                 "2 cucharadas de curry en polvo"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Sofreír cebolla picada hasta dorar.",
                 "Agregar tomate picado y curry en polvo.",
@@ -373,7 +413,8 @@ object RecetasDataSource {
                 "1 papa cocida",
                 "Comino, sal y pimienta al gusto",
                 "Aceite para freír"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Sofreír la cebolla y luego agregar la carne.",
                 "Añadir la papa en cubos y sazonar.",
@@ -391,7 +432,8 @@ object RecetasDataSource {
                 "Hojas de albahaca",
                 "Aceite de oliva",
                 "Sal y pimienta"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Cortar los tomates y la mozzarella en rodajas.",
                 "Alternar en un plato con hojas de albahaca.",
@@ -410,7 +452,8 @@ object RecetasDataSource {
                 "1/2 pimiento",
                 "Jugo de 1 limón",
                 "Aceite de oliva, sal y pimienta"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Cortar las verduras en cubos pequeños.",
                 "Mezclar con la quinua cocida.",
@@ -429,7 +472,8 @@ object RecetasDataSource {
                 "1 cebolla",
                 "Tortillas de harina",
                 "Condimentos: comino, sal, pimienta"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Saltear la carne en una sartén con condimentos.",
                 "Agregar las verduras en tiras y cocinar hasta que estén tiernas.",
@@ -446,7 +490,8 @@ object RecetasDataSource {
                 "Ajo picado",
                 "Perejil",
                 "Aceite de oliva, sal y pimienta"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Precalentar el horno a 180°C.",
                 "Colocar los filetes en una bandeja y sazonar con ajo, perejil, sal y pimienta.",
@@ -464,7 +509,8 @@ object RecetasDataSource {
                 "1 cucharada de salsa de soya",
                 "1 cucharadita de miel",
                 "Ajo picado, sal y pimienta"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Saltear el pollo hasta dorar.",
                 "Agregar el jugo de naranja, soya, miel y ajo.",
@@ -483,7 +529,8 @@ object RecetasDataSource {
                 "Pepinillos",
                 "Mostaza",
                 "Queso suizo"
-            ),
+            ),tiempo = "45 Min",
+            dificultad = "Media",
             pasos = listOf(
                 "Abrir el pan y untar con mostaza.",
                 "Agregar capas de jamón, cerdo, queso y pepinillos.",
@@ -500,7 +547,8 @@ object RecetasDataSource {
                 "1 papa",
                 "1 tomate",
                 "Cebolla, ajo y especias"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Lavar las lentejas y cocinar con agua.",
                 "Agregar los vegetales picados y sazonar.",
@@ -518,7 +566,8 @@ object RecetasDataSource {
                 "1/2 cebolla",
                 "Caldo de verduras",
                 "Sal, pimienta y albahaca"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Saltear ajo y cebolla, agregar tomates picados.",
                 "Cocinar por 10 minutos, luego licuar todo.",
@@ -536,7 +585,8 @@ object RecetasDataSource {
                 "1 cebolla",
                 "Aceite de oliva",
                 "Sal"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Cortar las papas y la cebolla en rodajas finas.",
                 "Freír en aceite hasta que estén blandas.",
@@ -554,7 +604,8 @@ object RecetasDataSource {
                 "1/2 taza de leche",
                 "1 plátano maduro",
                 "1 cucharadita de polvo de hornear"
-            ),
+            ),tiempo = "35 Min",
+            dificultad = "Alta",
             pasos = listOf(
                 "Licuar todos los ingredientes hasta obtener una mezcla homogénea.",
                 "Verter en la wafflera caliente.",
