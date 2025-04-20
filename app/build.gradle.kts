@@ -51,14 +51,12 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation("org.osmdroid:osmdroid-android:6.1.20")
-    implementation ("com.google.android.gms:play-services-location:21.0.1")
-
 
 
     // Agrega esta línea para Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.5")
 
-    // Agrega estas líneas para ExoPlayer
+    // ✅ Agrega estas líneas para ExoPlayer
     implementation("androidx.media3:media3-exoplayer:1.2.0")
     implementation("androidx.media3:media3-ui:1.2.0")
     implementation(libs.androidx.appcompat)

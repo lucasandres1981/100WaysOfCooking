@@ -1,16 +1,12 @@
 package com.example.waysofcooking.ui.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -22,18 +18,19 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-import com.google.android.gms.location.LocationServices
+import org.osmdroid.util.BoundingBox
 
-@SuppressLint("MissingPermission")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun StoreScreen(navController: NavHostController) {
     val context = LocalContext.current
-    val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
     val mapView = remember { MapView(context) }
 
-    var userLocation by remember { mutableStateOf<GeoPoint?>(null) }
+    // Ubicación por defecto
+    val defaultLocation = remember { GeoPoint(4.598056, -74.075833) }
+
     var searchText by remember { mutableStateOf("") }
-    var zoomLevel by remember { mutableStateOf(16.0) }
+    var zoomLevel by remember { mutableStateOf(18.0) }
 
     val tiendas = listOf(
         GeoPoint(4.5981, -74.0760) to "Frutas",
@@ -49,31 +46,38 @@ fun StoreScreen(navController: NavHostController) {
             mapView.overlays.removeAll { overlay ->
                 overlay is Marker && overlay.title?.startsWith("📍") == true
             }
+
+            // Asegurar marcador inicial
+            if (mapView.overlays.none { it is Marker && it.title == "Ubicación inicial" }) {
+                addMarker(mapView, defaultLocation, "Ubicación inicial")
+            }
+
             addMarker(mapView, punto, "📍 $nombreTienda")
-            mapView.controller.animateTo(punto)
+
+            val boundingBox = BoundingBox(
+                maxOf(defaultLocation.latitude, punto.latitude),
+                maxOf(defaultLocation.longitude, punto.longitude),
+                minOf(defaultLocation.latitude, punto.latitude),
+                minOf(defaultLocation.longitude, punto.longitude)
+            )
+
+            mapView.zoomToBoundingBox(boundingBox, true)
+            mapView.invalidate()
         }
     }
 
-    // Inicializar mapa y obtener ubicación
+    // Inicialización del mapa
     LaunchedEffect(Unit) {
         Configuration.getInstance().load(context, context.getSharedPreferences("osm_prefs", 0))
         Configuration.getInstance().userAgentValue = context.packageName
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            val point = if (location != null) {
-                GeoPoint(location.latitude, location.longitude)
-            } else {
-                GeoPoint(4.598056, -74.075833)
-            }
-            userLocation = point
-            mapView.apply {
-                setTileSource(TileSourceFactory.MAPNIK)
-                setMultiTouchControls(true)
-                controller.setZoom(zoomLevel)
-                controller.setCenter(point)
-                addMarker(this, point, "📍 Mi Ubicación")
-                invalidate()
-            }
+        mapView.apply {
+            setTileSource(TileSourceFactory.MAPNIK)
+            setMultiTouchControls(true)
+            controller.setZoom(zoomLevel)
+            controller.setCenter(defaultLocation)
+            addMarker(this, defaultLocation, "Ubicación inicial")
+            invalidate()
         }
     }
 
@@ -84,57 +88,69 @@ fun StoreScreen(navController: NavHostController) {
     MainScaffold(
         navController = navController,
         drawerContent = { scope, drawerState ->
-            DrawerMenuContent(navController = navController, scope = scope, drawerState = drawerState)
-        }
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-        ) {
+            DrawerMenuContent(
+                navController = navController,
+                scope = scope,
+                drawerState = drawerState
+            )
+        },
+        content = { innerPadding ->
             Column(
                 modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
                     .padding(16.dp)
-                    .fillMaxWidth()
-                    .align(Alignment.TopCenter)
             ) {
+                //Text("Mapa de Tiendas para tus Recetas", style = MaterialTheme.typography.titleLarge)
+
                 OutlinedTextField(
                     value = searchText,
                     onValueChange = { searchText = it },
-                    label = { Text("Buscar tienda por nombre") },
+                    label = { Text("Mapa de Tiendas para tus Recetas") },
                     modifier = Modifier.fillMaxWidth(),
                     trailingIcon = {
-                        IconButton(onClick = { buscarTienda(searchText) }) {
-                            Icon(Icons.Default.Search, contentDescription = "Buscar")
+                        if (searchText.isNotEmpty()) {
+                            IconButton(onClick = { searchText = "" }) {
+                                Icon(imageVector = Icons.Default.Search, contentDescription = null)
+                            }
                         }
                     }
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Text("Nivel de zoom: ${zoomLevel.toInt()}")
+                Button(
+                    onClick = { buscarTienda(searchText) },
+                    enabled = searchText.isNotEmpty(),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Buscar Tienda")
+                }
 
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text("Nivel de zoom: ${zoomLevel.toInt()}")
                 Slider(
                     value = zoomLevel.toFloat(),
                     onValueChange = { zoomLevel = it.toDouble() },
-                    valueRange = 4f..20f,
+                    valueRange = 4f..19f,
                     modifier = Modifier.fillMaxWidth()
                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 AndroidView(
                     factory = { mapView },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f) // Ocupa el espacio restante dentro de la Column
-                        .clip(RoundedCornerShape(16.dp))
-                        .border(1.dp, MaterialTheme.colorScheme.primary)
+                        .weight(1f)
                 )
             }
         }
-    }
+    )
 }
 
-// Función para agregar marcador al mapa
+// 🔧 Función auxiliar para agregar marcadores
 fun addMarker(mapView: MapView, point: GeoPoint, title: String): Marker {
     return Marker(mapView).apply {
         position = point

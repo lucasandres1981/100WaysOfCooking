@@ -17,17 +17,8 @@ import com.example.waysofcooking.R
 import com.example.waysofcooking.ui.components.DrawerMenuContent
 import com.example.waysofcooking.ui.components.MainScaffold
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
-import com.example.waysofcooking.data.FavoriteRecipesStorage
-import com.example.waysofcooking.data.Receta
-import com.example.waysofcooking.data.RecetasDataSource
-import com.example.waysofcooking.data.SessionManager
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+
 
 
 data class Recipe(
@@ -41,17 +32,24 @@ data class Recipe(
 
 @Composable
 fun FavoritesScreen(navController: NavHostController) {
-    val context = LocalContext.current
-    val nickName = remember { SessionManager.getLoggedUserNick(context) }
-    val recetas = RecetasDataSource.recetas
-
-    val favoritasIds = remember(nickName) {
-        nickName?.let {
-            FavoriteRecipesStorage.getFavorites(context, it)
-        } ?: emptyList()
-    }
-
-    val favoriteRecipes = recetas.filter { it.nombreId in favoritasIds }
+    val favoriteRecipes = listOf(
+        Recipe(
+            id = 1,
+            name = "Panqueques con Banana y Miel",
+            imageResource = R.drawable.waffles_de_avena,
+            time = "15 min",
+            difficulty = "Fácil",
+            description = "Deliciosos panqueques con banana y miel..."
+        ),
+        Recipe(
+            id = 2,
+            name = "Arroz con Pollo",
+            imageResource = R.drawable.arroz_con_pollo,
+            time = "20 min",
+            difficulty = "Media",
+            description = "Una receta tradicional perfecta para cualquier ocasión."
+        )
+    )
 
     MainScaffold(
         navController = navController,
@@ -65,24 +63,22 @@ fun FavoritesScreen(navController: NavHostController) {
                     .padding(16.dp)
                     .fillMaxSize()
             ) {
+
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Mis Recetas Favoritas",
+                    text = "Favoritos",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold
+
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                if (favoriteRecipes.isEmpty()) {
-                    Text("No tienes recetas favoritas aún.")
-                } else {
-                    LazyColumn {
-                        items(favoriteRecipes) { receta ->
-                            RecipeCardFavorita(receta = receta, navController = navController)
-                            Spacer(modifier = Modifier.height(8.dp))
-                        }
+                LazyColumn {
+                    items(favoriteRecipes) { recipe ->
+                        RecipeCard(recipe = recipe, navController = navController)
+                        Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
             }
@@ -91,13 +87,7 @@ fun FavoritesScreen(navController: NavHostController) {
 }
 
 @Composable
-fun RecipeCardFavorita(receta: Receta, navController: NavHostController) {
-    val context = LocalContext.current
-    val nickName = remember { SessionManager.getLoggedUserNick(context) }
-    var removed = remember { mutableStateOf(false) }
-
-    if (removed.value) return    // Oculta la tarjeta si ya fue eliminada
-
+fun RecipeCard(recipe: Recipe, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -112,36 +102,27 @@ fun RecipeCardFavorita(receta: Receta, navController: NavHostController) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    painter = painterResource(id = receta.imagenResId),
-                    contentDescription = receta.nombre,
+                    painter = painterResource(id = recipe.imageResource),
+                    contentDescription = recipe.name,
                     modifier = Modifier
                         .size(80.dp)
                         .padding(end = 16.dp)
                         .clip(RoundedCornerShape(8.dp))
                 )
 
-                Column(modifier = Modifier.weight(1f)) {
+                Column {
                     Text(
-                        text = receta.nombre,
+                        text = recipe.name,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
                     )
-                }
 
-                // ❤️ Botón para eliminar
-                IconButton(
-                    onClick = {
-                        if (nickName != null) {
-                            FavoriteRecipesStorage.removeFavorite(context, nickName, receta.nombreId)
-                            removed.value = true
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                        }
-                    }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = "Quitar de favoritos",
-                        tint = MaterialTheme.colorScheme.error
+                    Text(
+                        text = "${recipe.time} - ${recipe.difficulty}",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -150,13 +131,12 @@ fun RecipeCardFavorita(receta: Receta, navController: NavHostController) {
 
             Button(
                 onClick = {
-                    navController.navigate("recipe_detail/${receta.nombreId}")
+                    navController.navigate("Search")
                 },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text("Ver Receta")
             }
-
         }
     }
 }
