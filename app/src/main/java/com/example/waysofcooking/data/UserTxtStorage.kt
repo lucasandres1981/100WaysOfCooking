@@ -3,22 +3,27 @@ package com.example.waysofcooking.data
 import android.content.Context
 import java.io.File
 
-
 object UserTxtStorage {
     private const val FILE_NAME = "usuarios.txt"
+
+    private fun isValidEmail(email: String): Boolean {
+        return email.contains("@") && email.contains(".") && email.length > 5
+    }
 
     fun saveUser(context: Context, user: User): Boolean {
         val file = File(context.filesDir, FILE_NAME)
 
-        // para evitar duplicados
+        if (!isValidEmail(user.email)) return false
+
+        // para evitar duplicados por correo o nickname
         if (file.exists()) {
             val lines = file.readLines()
-            if (lines.any { it.contains(user.email) }) {
+            if (lines.any { it.contains(user.email, ignoreCase = true) || it.contains(user.nickName) }) {
                 return false
             }
         }
 
-        val line = "${user.fullName},${user.email},${user.password}\n"
+        val line = "${user.nickName},${user.fullName},${user.email},${user.password}\n"
         file.appendText(line)
         return true
     }
@@ -29,19 +34,32 @@ object UserTxtStorage {
 
         return file.readLines().any {
             val parts = it.split(",")
-            parts.size == 3 && parts[1] == email && parts[2] == password
+            parts.size == 4 && parts[2] == email && parts[3] == password
         }
-    } // ← ESTA llave faltaba
+    }
 
-    fun getUserByEmail(context: Context, email: String): User? {
+    fun getUserByNick(context: Context, nickName: String): User? {
         val file = File(context.filesDir, FILE_NAME)
         if (!file.exists()) return null
 
         return file.readLines()
             .mapNotNull { line ->
                 val parts = line.split(",")
-                if (parts.size >= 3 && parts[1] == email) {
-                    User(parts[0], parts[1], parts[2]) // fullName, email, password
+                if (parts.size == 4 && parts[0] == nickName) {
+                    User(parts[0], parts[1], parts[2], parts[3])
+                } else null
+            }.firstOrNull()
+    }
+
+    fun getUserByEmailAndPassword(context: Context, email: String, password: String): User? {
+        val file = File(context.filesDir, FILE_NAME)
+        if (!file.exists()) return null
+
+        return file.readLines()
+            .mapNotNull { line ->
+                val parts = line.split(",")
+                if (parts.size == 4 && parts[2] == email && parts[3] == password) {
+                    User(parts[0], parts[1], parts[2], parts[3])
                 } else null
             }.firstOrNull()
     }

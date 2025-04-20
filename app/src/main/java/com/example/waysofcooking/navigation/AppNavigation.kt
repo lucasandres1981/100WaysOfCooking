@@ -57,8 +57,25 @@ fun AppNavigation(navController: NavHostController) {
             AllRecipesScreen(navController = navController)
         }
 
+        composable("select_avatar") {
+            SelectAvatarScreen(navController)
+        }
+
+        composable("edit_profile") {
+            EditProfileScreen(navController)
+        }
+
         composable("settings") {
             SettingsScreen(navController = navController)
         }
+        composable(
+            route = "recipe_video/{videoId}",
+            arguments = listOf(navArgument("videoId") { defaultValue = "" })
+        ) { backStackEntry ->
+            //val videoId = backStackEntry.arguments?.getString("videoId") ?: ""
+            //YouTubeWebViewScreen(videoId = videoId)
+        }
+
     }
 }
+

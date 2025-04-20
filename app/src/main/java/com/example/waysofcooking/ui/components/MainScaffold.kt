@@ -11,6 +11,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import com.example.waysofcooking.data.SessionManager
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.graphics.Color
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,12 +40,31 @@ fun MainScaffold(
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        drawerContent = drawerContentFinal // ← ya es de tipo () -> Unit
+        drawerContent = drawerContentFinal // ya es de tipo () -> Unit
     ) {
+        val context = LocalContext.current
+        val loggednickName = remember { SessionManager.getLoggedUserNick(context) }
+
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("100 Ways Of Cooking") },
+                    title = {
+                        Text(
+                            text = "100 Ways Of Cooking",
+                            style = MaterialTheme.typography.titleLarge,
+                            //color = MaterialTheme.
+                            color = Color.White
+                        )
+                    },
+                    //colors = TopAppBarDefaults.topAppBarColors(
+                    //    containerColor = MaterialTheme.colorScheme.primary,
+                    //    titleContentColor = MaterialTheme.colorScheme.onPrimary
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        titleContentColor = Color.White,
+                        navigationIconContentColor = Color.White,
+                        actionIconContentColor = Color.White
+                    ),
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch { drawerState.open() }
@@ -48,10 +73,24 @@ fun MainScaffold(
                         }
                     },
                     actions = {
-                        TextButton(onClick = {
-                            navController.navigate("login")// Acción al login
-                        }) {
-                            Text("Login")
+                        if (loggednickName != null) {
+                            Text(
+                                text = loggednickName,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.padding(end = 16.dp)
+                            )
+                        } else {
+                            TextButton(onClick = {
+                                navController.navigate("login")
+                            }) {
+                                Text(
+                                    text = "Login",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    //color = MaterialTheme.colorScheme.onPrimary,
+                                    color = Color.White,
+                                    modifier = Modifier.padding(end = 18.dp)
+                                )
+                            }
                         }
                     }
                 )

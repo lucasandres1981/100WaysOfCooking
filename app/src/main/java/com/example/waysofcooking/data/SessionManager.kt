@@ -1,23 +1,32 @@
 package com.example.waysofcooking.data
+
 import android.content.Context
 import android.content.SharedPreferences
 
 object SessionManager {
     private const val PREF_NAME = "user_session"
-    private const val KEY_EMAIL = "logged_email"
+    private const val KEY_NICK = "logged_user_nick"
 
-    fun saveUserEmail(context: Context, email: String) {
-        val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        prefs.edit().putString(KEY_EMAIL, email).apply()
+    private fun getPrefs(context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
 
-    fun getLoggedUserEmail(context: Context): String? {
-        val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        return prefs.getString(KEY_EMAIL, null)
+    // Guarda el nickName (no el email)
+    fun saveUserNickName(context: Context, nickName: String) {
+        val editor = getPrefs(context).edit()
+        editor.putString(KEY_NICK, nickName)
+        editor.apply()
     }
 
+    // Obtiene el nickName
+    fun getLoggedUserNick(context: Context): String? {
+        return getPrefs(context).getString(KEY_NICK, null)
+    }
+
+    // Borra la sesión
     fun clearSession(context: Context) {
-        val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        prefs.edit().clear().apply()
+        val editor = getPrefs(context).edit()
+        editor.clear()
+        editor.apply()
     }
 }

@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,6 +25,11 @@ import com.example.waysofcooking.data.UserTxtStorage
 import com.example.waysofcooking.ui.components.MainScaffold
 import com.example.waysofcooking.ui.components.DrawerMenuContent
 import com.example.waysofcooking.ui.components.SimpleScaffold
+import com.example.waysofcooking.data.SessionManager
+import com.example.waysofcooking.ui.components.AppButton
+import com.example.waysofcooking.ui.components.AppTextField
+
+
 
 
 
@@ -34,7 +40,7 @@ fun LoginScreen(navController: NavHostController) {
     var password by remember { mutableStateOf("") }
     var loginSuccess by remember { mutableStateOf<Boolean?>(null) }
 
-    val context = LocalContext.current // ← esta línea debe estar aquí
+    val context = LocalContext.current // esta línea debe estar aquí
 
     MainScaffold(
         navController = navController,
@@ -47,41 +53,56 @@ fun LoginScreen(navController: NavHostController) {
                     .padding(innerPadding)
                     .fillMaxSize()
                     .padding(16.dp),
-                verticalArrangement = Arrangement.Center
+                //verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = { Text("Email") },
-                    modifier = Modifier.fillMaxWidth()
+                Image(
+                    painter = painterResource(id = R.drawable.logo),
+                    contentDescription = "Logo de 100 Ways of Cooking",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp)
+                        .height(200.dp),
+                    contentScale = ContentScale.Fit
                 )
 
-                OutlinedTextField(
+                Spacer(modifier = Modifier.height(20.dp))
+
+                AppTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = "Email"
+                )
+
+                AppTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Contraseña") },
-                    modifier = Modifier.fillMaxWidth()
+                    label = "Contraseña",
+                    isPassword = true
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Button(
+                AppButton(
+                    text = "Iniciar Sesión",
                     onClick = {
-                        loginSuccess = UserTxtStorage.userExists(context, email, password)
-                        if (loginSuccess == true) {
+                        val user =
+                            UserTxtStorage.getUserByEmailAndPassword(context, email, password)
+                        if (user != null) {
+                            SessionManager.saveUserNickName(context, user.nickName)
+                            loginSuccess = true
                             navController.navigate("home") {
-                                popUpTo("login") { inclusive = true } // para que no se regrese al loging
+                                popUpTo("login") { inclusive = true }
                             }
+                        } else {
+                            loginSuccess = false
                         }
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Iniciar Sesión")
-                }
+                    }
+                )
 
                 loginSuccess?.let {
                     Text(
-                        if (it) "Inicio de sesión exitoso" else "Datos incorrectos",
+                        text = if (it) "Inicio de sesión exitoso" else "Datos incorrectos",
                         color = if (it) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
                     )
                 }
@@ -90,19 +111,18 @@ fun LoginScreen(navController: NavHostController) {
 
                 Text(
                     text = "¿No tienes cuenta?",
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                    style = MaterialTheme.typography.bodyLarge
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Button(
+                AppButton(
+                    text = "Regístrate aquí",
                     onClick = {
                         navController.navigate("Register")
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Regístrate aquí")
-                }
+                    }
+                )
+
             }
         }
     )

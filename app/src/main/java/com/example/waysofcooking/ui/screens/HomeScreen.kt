@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import com.example.waysofcooking.ui.components.AppButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,17 +45,17 @@ fun HomeScreen(navController: NavHostController) {
                         .height(200.dp),
                     contentScale = ContentScale.Fit
                 )
+                Spacer(modifier = Modifier.height(20.dp))
 
-                Button(
+                AppButton(
+                    text = "Explorar Recetas",
                     onClick = { navController.navigate("search") },
                     modifier = Modifier
-                        .padding(top = 16.dp)
-                        .align(Alignment.CenterHorizontally)
-                ) {
-                    Text("Explorar Recetas")
-                }
+                        .padding(horizontal = 32.dp) // opcional para que no se pegue al borde
+                )
 
-                Spacer(modifier = Modifier.height(24.dp))
+
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
                     text = "🍽 Recetas Populares",
@@ -63,6 +66,7 @@ fun HomeScreen(navController: NavHostController) {
                         .padding(start = 16.dp, bottom = 16.dp),
                     textAlign = TextAlign.Center
                 )
+                Spacer(modifier = Modifier.height(20.dp))
 
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
@@ -79,6 +83,7 @@ fun HomeScreen(navController: NavHostController) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .aspectRatio(1f)
+                                .clip(RoundedCornerShape(16.dp))
                                 .clickable {
                                     val nombreId = receta.nombreId
                                     navController.navigate("recipe_detail/$nombreId")

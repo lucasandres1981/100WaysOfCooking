@@ -20,18 +20,23 @@ import com.example.waysofcooking.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.ui.draw.clip
 import android.content.SharedPreferences
+import com.example.waysofcooking.data.AvatarStorage
+import com.example.waysofcooking.data.UserPreferencesStorage
 import com.example.waysofcooking.data.UserTxtStorage
+import com.example.waysofcooking.ui.components.AppButton
+import com.example.waysofcooking.ui.screens.EditProfileScreen
+
+
 
 @Composable
 fun ProfileScreen(navController: NavHostController) {
     val context = LocalContext.current
-    val email = remember { SessionManager.getLoggedUserEmail(context) }
-    val user = remember(email) { email?.let { it: String -> UserTxtStorage.getUserByEmail(context, it) } }
+    val nickName = remember { SessionManager.getLoggedUserNick(context) }
+    val user = remember(nickName) { nickName?.let { UserTxtStorage.getUserByNick(context, it) } }
+    val preferences = remember(nickName) {nickName?.let {UserPreferencesStorage.getPreferences(context, it) }
+    }
 
 
     MainScaffold(
@@ -55,17 +60,32 @@ fun ProfileScreen(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                val avatarResName = AvatarStorage.getAvatar(context)
+                val avatarResId = remember(avatarResName) {
+                    context.resources.getIdentifier(avatarResName, "drawable", context.packageName)
+                }
+
                 Image(
-                    painter = painterResource(id = R.drawable.lucas),
+                    painter = painterResource(id = avatarResId),
                     contentDescription = "Avatar",
                     modifier = Modifier
                         .size(100.dp)
                         .clip(CircleShape)
                 )
+                Spacer(modifier = Modifier.height(16.dp))
+
+                AppButton(
+                    text = "Cambiar avatar",
+                    onClick = {
+                        navController.navigate("select_avatar")
+                    }
+                )
+
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 user?.let {
+                    Text(text = "👤 ${it.nickName}", fontWeight = FontWeight.Bold)
                     Text(text = "👤 ${it.fullName}", fontWeight = FontWeight.Bold)
                     Text(text = "✉️ ${it.email}")
                 }
@@ -78,15 +98,19 @@ fun ProfileScreen(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                Text(text = "🍽️ Preferencias dietéticas: Vegetariano")
-                Text(text = "⚠️ Alergias registradas: Mariscos")
+                Text(text = "🍽️ Preferencias dietéticas: ${preferences?.get("diet") ?: "No registradas"}")
+                Text(text = "⚠️ Alergias registradas: ${preferences?.get("allergies") ?: "Ninguna"}")
                 Text(text = "❤️ Mis Recetas Favoritas")
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                Button(onClick = { /* Acción editar preferencias */ }) {
-                    Text("Editar preferencias")
-                }
+                AppButton(
+                    text = "Editar Preferencias",
+                    onClick = {
+                        navController.navigate("edit_profile")
+                    }
+                )
+
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -104,12 +128,3 @@ fun ProfileScreen(navController: NavHostController) {
 }
 
 
-fun readLastLoggedUser(context: Context): Pair<String, String>? { // Esta función obtiene la última línea del archivo usuarios.txt y devuelve el nombre y el email
-    val file = File(context.filesDir, "usuarios.txt")
-    if (!file.exists()) return null
-
-    val lines = file.readLines()
-    val lastLine = lines.lastOrNull() ?: return null
-    val parts = lastLine.split(",")
-    return if (parts.size >= 2) Pair(parts[0], parts[1]) else null
-}
