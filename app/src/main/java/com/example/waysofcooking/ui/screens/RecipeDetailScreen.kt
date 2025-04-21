@@ -125,7 +125,8 @@ fun RecipeDetailScreen(
                                         }
                                     }
                                 }
-                            ) {
+                            )
+                            {
                                 Icon(
                                     imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                                     contentDescription = null,

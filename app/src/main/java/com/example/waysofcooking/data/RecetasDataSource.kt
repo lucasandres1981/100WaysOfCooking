@@ -13,114 +13,6 @@ data class Receta(
 
 object RecetasDataSource {
     val recetas = listOf(
-        Receta(
-            nombre = "Arroz Chaufa",
-            nombreId = "Arroz Chaufa",
-            imagenResId = R.drawable.arroz_chaufa,
-            ingredientes = listOf("2 tazas de arroz cocido", "150g de pollo", "2 huevos", "Salsa de soya", "Cebolla larga"),
-            pasos = listOf(
-                "Freír el pollo en trozos.",
-                "Agregar huevo batido y revolver.",
-                "Añadir el arroz y mezclar con salsa de soya y cebolla picada."
-            )
-        ),
-        Receta(
-            nombre = "Ajiaco Santafereño",
-            nombreId = "Ajiaco Santafereño",
-            imagenResId = R.drawable.ajiaco_santafereno,
-            ingredientes = listOf("3 tipos de papa", "Pechuga de pollo", "Guascas", "Mazorca", "Crema de leche", "Alcaparras"),
-            pasos = listOf(
-                "Cocinar las papas con el pollo y la mazorca.",
-                "Añadir guascas y cocinar hasta espesar.",
-                "Servir con crema de leche y alcaparras."
-            )
-        ),
-        Receta(
-            nombre = "Albóndigas en Salsa",
-            nombreId = "Albóndigas en Salsa",
-            imagenResId = R.drawable.albondigas_en_salsa,
-            ingredientes = listOf("Carne molida", "Pan rallado", "Huevo", "Cebolla", "Salsa de tomate"),
-            pasos = listOf(
-                "Formar albóndigas con carne, pan rallado y huevo.",
-                "Freír y cocinar en salsa de tomate con cebolla."
-            )
-        ),
-        Receta(
-            nombre = "Arepas con Queso",
-            nombreId = "Arepas con Queso",
-            imagenResId = R.drawable.arepas_con_queso,
-            ingredientes = listOf("Harina de maíz", "Queso rallado", "Agua", "Sal"),
-            pasos = listOf(
-                "Mezclar harina, sal y agua.",
-                "Formar arepas e incluir queso.",
-                "Cocinar a la plancha."
-            )
-        ),
-        Receta(
-            nombre = "Ceviche de Camarón",
-            nombreId = "Ceviche de Camarón",
-            imagenResId = R.drawable.ceviche_de_camaron,
-            ingredientes = listOf("Camarón cocido", "Jugo de limón", "Cebolla morada", "Tomate", "Cilantro"),
-            pasos = listOf(
-                "Mezclar camarón con jugo de limón y vegetales.",
-                "Refrigerar y servir frío."
-            )
-        ),
-        Receta(
-            nombre = "Croquetas de Pollo",
-            nombreId = "Croquetas de Pollo",
-            imagenResId = R.drawable.croquetas_de_pollo,
-            ingredientes = listOf("Pollo desmenuzado", "Bechamel", "Pan rallado", "Huevo", "Aceite"),
-            pasos = listOf(
-                "Mezclar pollo con bechamel.",
-                "Formar croquetas y empanizar.",
-                "Freír hasta dorar."
-            )
-        ),
-        Receta(
-            nombre = "Curry de Garbanzos",
-            nombreId = "Curry de Garbanzos",
-            imagenResId = R.drawable.curry_de_garbanzos,
-            ingredientes = listOf("Garbanzos cocidos", "Leche de coco", "Curry", "Cebolla", "Ajo"),
-            pasos = listOf(
-                "Freír cebolla y ajo.",
-                "Agregar curry y garbanzos.",
-                "Verter leche de coco y cocinar."
-            )
-        ),
-        Receta(
-            nombre = "Empanada de Carne",
-            nombreId = "Empanada de Carne",
-            imagenResId = R.drawable.empanada_de_carne,
-            ingredientes = listOf("Masa para empanadas", "Carne molida", "Papa cocida", "Cebolla"),
-            pasos = listOf(
-                "Preparar relleno con carne y papa.",
-                "Rellenar y sellar la masa.",
-                "Freír hasta dorar."
-            )
-        ),
-        Receta(
-            nombre = "Ensalada Caprese",
-            nombreId = "Ensalada Caprese",
-            imagenResId = R.drawable.ensalada_caprese,
-            ingredientes = listOf("Tomate", "Mozzarella", "Albahaca", "Aceite de oliva"),
-            pasos = listOf(
-                "Cortar tomate y mozzarella.",
-                "Intercalar con hojas de albahaca.",
-                "Rociar aceite de oliva."
-            )
-        ),
-        Receta(
-            nombre = "Ensalada de Quínua",
-            nombreId = "Ensalada de Quínua",
-            imagenResId = R.drawable.ensalada_de_quinua,
-            ingredientes = listOf("Quínua cocida", "Pimientos", "Pepino", "Limón", "Aceite de oliva"),
-            pasos = listOf(
-                "Cocinar la quínua.",
-                "Cortar vegetales.",
-                "Mezclar todo y aliñar."
-            )
-        ),
 
         Receta(
             nombre = "Ajiaco Santafereño",
@@ -561,7 +453,153 @@ object RecetasDataSource {
                 "Cocinar hasta que estén dorados.",
                 "Servir con frutas o miel al gusto."
             )
+        ),
+        Receta(
+            nombre = "Arroz con Pollo",
+            nombreId = "Arroz con Pollo",
+            imagenResId = R.drawable.arroz_con_pollo,
+            ingredientes = listOf(
+                "2 tazas de arroz cocido",
+                "1 pechuga de pollo desmechada",
+                "1 zanahoria rallada",
+                "1/2 taza de arvejas",
+                "Ajo y cebolla al gusto",
+                "Sal, pimienta y comino"
+            ),
+            pasos = listOf(
+                "Sofreír ajo y cebolla en una olla.",
+                "Agregar la zanahoria, arvejas y pollo desmechado.",
+                "Añadir el arroz y mezclar bien.",
+                "Sazonar con sal, pimienta y comino al gusto.",
+                "Cocinar por 5 minutos más y servir caliente."
+            )
+        ),
+        Receta(
+            nombre = "Ensalada César con Pollo",
+            nombreId = "Ensalada César con Pollo",
+            imagenResId = R.drawable.ensalada_cesar_con_pollo,
+            ingredientes = listOf(
+                "Lechuga romana",
+                "Pechuga de pollo a la plancha",
+                "Crutones",
+                "Queso parmesano rallado",
+                "Aderezo César"
+            ),
+            pasos = listOf(
+                "Lavar y cortar la lechuga.",
+                "Cocinar y cortar el pollo en tiras.",
+                "Mezclar la lechuga con el pollo, crutones y queso.",
+                "Agregar aderezo al gusto y servir frío."
+            )
+        ),
+        Receta(
+            nombre = "Grilled Cheese",
+            nombreId = "Grilled Cheese",
+            imagenResId = R.drawable.grilled_cheese,
+            ingredientes = listOf(
+                "2 rebanadas de pan de molde",
+                "2 tajadas de queso",
+                "Mantequilla"
+            ),
+            pasos = listOf(
+                "Untar mantequilla por fuera de las rebanadas de pan.",
+                "Colocar el queso entre las rebanadas.",
+                "Cocinar en sartén hasta que esté dorado por ambos lados.",
+                "Servir caliente con el queso derretido."
+            )
+        ),
+        Receta(
+            nombre = "Hamburguesa Clásica con Queso",
+            nombreId = "Hamburguesa Clásica con Queso",
+            imagenResId = R.drawable.hamburguesa_clasica_con_queso,
+            ingredientes = listOf(
+                "1 pan de hamburguesa",
+                "1 carne de res para hamburguesa",
+                "1 tajada de queso cheddar",
+                "Lechuga, tomate y cebolla",
+                "Salsas al gusto"
+            ),
+            pasos = listOf(
+                "Cocinar la carne en sartén o parrilla.",
+                "Colocar el queso sobre la carne caliente para que se derrita.",
+                "Armar la hamburguesa con los vegetales y la carne.",
+                "Agregar las salsas y servir caliente."
+            )
+        ),
+        Receta(
+            nombre = "Pan de Ajo",
+            nombreId = "Pan de Ajo",
+            imagenResId = R.drawable.pan_de_ajo,
+            ingredientes = listOf(
+                "1 baguette o pan francés",
+                "2 cucharadas de mantequilla",
+                "2 dientes de ajo",
+                "Perejil fresco picado",
+                "Queso rallado (opcional)"
+            ),
+            pasos = listOf(
+                "Mezclar la mantequilla con el ajo picado y el perejil.",
+                "Cortar el pan en rebanadas sin llegar al fondo.",
+                "Untar la mezcla de ajo entre las rebanadas.",
+                "Agregar queso si se desea y hornear a 180°C por 10 minutos.",
+                "Servir caliente y crujiente."
+            )
+        ),
+        Receta(
+            nombre = "Papas Fritas",
+            nombreId = "Papas Fritas",
+            imagenResId = R.drawable.papas_fritas,
+            ingredientes = listOf(
+                "4 papas grandes",
+                "Aceite para freír",
+                "Sal al gusto"
+            ),
+            pasos = listOf(
+                "Pelar y cortar las papas en bastones.",
+                "Remojar en agua fría durante 30 minutos.",
+                "Escurrir y secar bien las papas.",
+                "Freír en aceite caliente hasta dorar.",
+                "Escurrir sobre papel y agregar sal."
+            )
+        ),
+        Receta(
+            nombre = "Spaghetti Carbonara",
+            nombreId = "Spaghetti Carbonara",
+            imagenResId = R.drawable.spaghetti_carbonara,
+            ingredientes = listOf(
+                "200 g de espaguetis",
+                "100 g de panceta o tocineta",
+                "2 yemas de huevo",
+                "Queso parmesano rallado",
+                "Pimienta negra"
+            ),
+            pasos = listOf(
+                "Cocinar la pasta según las instrucciones.",
+                "Saltear la panceta hasta dorar.",
+                "Batir las yemas con queso y pimienta.",
+                "Escurrir la pasta y mezclar con la panceta.",
+                "Agregar la mezcla de yemas y revolver rápidamente.",
+                "Servir caliente con más queso si se desea."
+            )
+        ),
+        Receta(
+            nombre = "Tacos al Pastor",
+            nombreId = "Tacos al Pastor",
+            imagenResId = R.drawable.tacos_al_pastor,
+            ingredientes = listOf(
+                "500 g de carne de cerdo en tiras",
+                "Tortillas de maíz",
+                "Piña en cubos",
+                "Cebolla y cilantro picados",
+                "Salsa al gusto"
+            ),
+            pasos = listOf(
+                "Marinar la carne con especias al pastor y cocinarla.",
+                "Calentar las tortillas.",
+                "Servir la carne sobre las tortillas con piña, cebolla y cilantro.",
+                "Acompañar con salsa y limón."
+            )
         )
-        // para poner más recetas - no olvidar las fotos de cada receta.
+// para poner más recetas - no olvidar las fotos de cada receta.
     )
 }

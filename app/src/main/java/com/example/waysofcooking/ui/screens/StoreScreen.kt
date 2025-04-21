@@ -1,24 +1,28 @@
 package com.example.waysofcooking.ui.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.navigation.NavHostController
 import com.example.waysofcooking.ui.components.DrawerMenuContent
 import com.example.waysofcooking.ui.components.MainScaffold
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.util.BoundingBox
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -26,7 +30,6 @@ fun StoreScreen(navController: NavHostController) {
     val context = LocalContext.current
     val mapView = remember { MapView(context) }
 
-    // Ubicación por defecto
     val defaultLocation = remember { GeoPoint(4.598056, -74.075833) }
 
     var searchText by remember { mutableStateOf("") }
@@ -47,7 +50,6 @@ fun StoreScreen(navController: NavHostController) {
                 overlay is Marker && overlay.title?.startsWith("📍") == true
             }
 
-            // Asegurar marcador inicial
             if (mapView.overlays.none { it is Marker && it.title == "Ubicación inicial" }) {
                 addMarker(mapView, defaultLocation, "Ubicación inicial")
             }
@@ -66,7 +68,6 @@ fun StoreScreen(navController: NavHostController) {
         }
     }
 
-    // Inicialización del mapa
     LaunchedEffect(Unit) {
         Configuration.getInstance().load(context, context.getSharedPreferences("osm_prefs", 0))
         Configuration.getInstance().userAgentValue = context.packageName
@@ -98,42 +99,30 @@ fun StoreScreen(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .fillMaxSize()
                     .padding(16.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                //Text("Mapa de Tiendas para tus Recetas", style = MaterialTheme.typography.titleLarge)
-
                 OutlinedTextField(
                     value = searchText,
                     onValueChange = { searchText = it },
-                    label = { Text("Mapa de Tiendas para tus Recetas") },
+                    label = { Text("Buscar tienda por nombre") },
                     modifier = Modifier.fillMaxWidth(),
                     trailingIcon = {
-                        if (searchText.isNotEmpty()) {
-                            IconButton(onClick = { searchText = "" }) {
-                                Icon(imageVector = Icons.Default.Search, contentDescription = null)
-                            }
+                        IconButton(onClick = { buscarTienda(searchText) }) {
+                            Icon(Icons.Default.Search, contentDescription = "Buscar")
                         }
                     }
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Button(
-                    onClick = { buscarTienda(searchText) },
-                    enabled = searchText.isNotEmpty(),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Buscar Tienda")
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
                 Text("Nivel de zoom: ${zoomLevel.toInt()}")
+
                 Slider(
                     value = zoomLevel.toFloat(),
                     onValueChange = { zoomLevel = it.toDouble() },
-                    valueRange = 4f..19f,
+                    valueRange = 4f..20f,
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -143,14 +132,17 @@ fun StoreScreen(navController: NavHostController) {
                     factory = { mapView },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f)
+                        .weight(0.55f)
+                        .padding(top = 5.dp)
+                        .height(300.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .border(1.dp, MaterialTheme.colorScheme.primary)
                 )
             }
         }
     )
 }
 
-// 🔧 Función auxiliar para agregar marcadores
 fun addMarker(mapView: MapView, point: GeoPoint, title: String): Marker {
     return Marker(mapView).apply {
         position = point
