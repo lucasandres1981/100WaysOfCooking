@@ -65,13 +65,13 @@ fun DrawerMenuContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(10.dp)
         ) {
             // Encabezado del usuario
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 24.dp),
+                    .padding(vertical = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
@@ -85,7 +85,7 @@ fun DrawerMenuContent(
                 )
 
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(5.dp))
                 Text(
                     text = user?.nickName ?: "Invitado",
                     style = MaterialTheme.typography.titleMedium
@@ -96,7 +96,7 @@ fun DrawerMenuContent(
                     color = Color(0xFF707070)
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(5.dp))
 
                 AppButton(
                     text = "👤 Mi perfil",
@@ -109,32 +109,44 @@ fun DrawerMenuContent(
                 )
             }
 
-            Divider(modifier = Modifier.padding(vertical = 20.dp), thickness = 6.dp)
+            Divider(modifier = Modifier.padding(vertical = 10.dp), thickness = 6.dp)
 
             // Opciones de menú
             MenuSection(title = "Menú Principal") {
-                Spacer(modifier = Modifier.height(20.dp))
+
+                DrawerItem("🏠 Home") {
+                    navigateWithDelay(scope, drawerState) { navController.navigate("home") }
+                }
+                Spacer(modifier = Modifier.height(10.dp))
                 DrawerItem("🍲 Recetas") {
                     navigateWithDelay(scope, drawerState) { navController.navigate("search") }
                 }
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 DrawerItem("🎥 Videos") {
                     navigateWithDelay(scope, drawerState) { navController.navigate("videos") }
                 }
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 DrawerItem("❤️ Favoritos") {
                     navigateWithDelay(scope, drawerState) { navController.navigate("favorites") }
                 }
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 DrawerItem("🛍 Tiendas") {
                     navigateWithDelay(scope, drawerState) { navController.navigate("store") }
                 }
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
+
+                //Button(onClick = { navController.navigate("web_browser") }) {
+                    //Text("Navegar en Web")
+                DrawerItem("🔍 Buscador Web") {
+                    navigateWithDelay(scope, drawerState) { navController.navigate("web_browser") }
+                }
+
+
             }
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Divider(modifier = Modifier.padding(vertical = 12.dp), thickness = 1.dp)
+            Divider(modifier = Modifier.padding(vertical = 10.dp), thickness = 1.dp)
 
             DrawerItem("📕 Cerrar sesión") {
                 scope.launch {

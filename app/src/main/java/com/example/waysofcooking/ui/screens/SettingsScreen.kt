@@ -48,7 +48,7 @@ fun SettingsScreen(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Aquí va el contenido específico de esta pantalla
+                //
             }
         }
     )

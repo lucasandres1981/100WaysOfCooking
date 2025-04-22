@@ -64,7 +64,9 @@ fun AppNavigation(navController: NavHostController) {
         composable("edit_profile") {
             EditProfileScreen(navController)
         }
-
+        composable("web_browser") {
+            WebBrowserScreen(navController)
+        }
         composable("settings") {
             SettingsScreen(navController = navController)
         }

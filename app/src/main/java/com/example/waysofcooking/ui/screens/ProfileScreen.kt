@@ -69,7 +69,7 @@ fun ProfileScreen(navController: NavHostController) {
                     painter = painterResource(id = avatarResId),
                     contentDescription = "Avatar",
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(150.dp)
                         .clip(CircleShape)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -92,9 +92,14 @@ fun ProfileScreen(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                Button(onClick = { /* Acción editar perfil */ }) {
-                    Text("Editar perfil")
-                }
+                //Button(onClick = { /* Acción editar perfil */ }) {
+                //    Text("Editar perfil")
+                AppButton(
+                    text = "Editar Perfil",
+                    onClick = {
+                        navController.navigate("select_avatar")
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
